@@ -5,15 +5,19 @@ public class Queue <E> {
     public Queue(Integer top) {
         queue = new QuequImplementation<>(top);
     }
+    
+    
     public Boolean queue(E data) {
-        try {
-            queue.queue(data);
-            return true;
-        } catch (Exception e) {
-            return false;
-            // TODO: handle exception
-        }
+    try {
+        queue.queue(data);
+        return true;
+    } catch (Exception e) {
+        System.err.println("Error al agregar a la cola: " + e.getMessage());
+        return false;
+        // TODO: handle exception
     }
+}
+
 
     public E dequeue() {
         try {
@@ -23,6 +27,8 @@ public class Queue <E> {
             return null;
         }
     }
+    
+
 
     public Boolean isFullQueue() {
         return queue.isFullQueque();

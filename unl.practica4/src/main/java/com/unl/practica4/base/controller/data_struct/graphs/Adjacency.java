@@ -4,7 +4,7 @@ public class Adjacency {
     private Integer destiny;
     private Float weight;
 
-    public Integer getdestiny() {
+    public Integer getDestiny() {
         return this.destiny;
     }
 

@@ -11,7 +11,6 @@ public abstract class Graph {
     public abstract void insert(Integer o, Integer d, float weight);
     public abstract LinkedList<Adjacency> adjacencies(Integer o);
     
-    
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -21,8 +20,8 @@ public abstract class Graph {
             if (!list.isEmpty()) {
                 Adjacency[] matrix = list.toArray();
                 for (Adjacency adjacency : matrix) {
-                    sb.append(" \tAdjacency ").append("\n").append(" \tVertex = ")
-                    .append(String.valueOf(adjacency.getdestiny()));
+                    sb.append("\tAdjacency").append("\n").append(" \tVertex = ")
+                    .append(String.valueOf(adjacency.getDestiny()));
                     if (!adjacency.getWeight().isNaN()) {
                         sb.append("weight ="+ adjacency.getWeight().toString()).append("\n");
                     }
