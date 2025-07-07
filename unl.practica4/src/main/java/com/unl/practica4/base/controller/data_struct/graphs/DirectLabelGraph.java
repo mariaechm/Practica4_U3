@@ -4,8 +4,8 @@ import java.lang.reflect.Array;
 import com.unl.practica4.base.controller.data_struct.list.LinkedList;
 
 public class DirectLabelGraph<E> extends DirectGraph {
-    protected E labels[];
-    protected LinkedList<VertexPair<E>> vertexDictionary;
+    protected E labels[]; //almacena a las etiquetas de cada vertice
+    protected LinkedList<VertexPair<E>> vertexDictionary; //list mapea etiquetas con numeros de vertices
     private Class clazz;
 
     public DirectLabelGraph(Integer nro_vertex, Class clazz) {
@@ -15,7 +15,7 @@ public class DirectLabelGraph<E> extends DirectGraph {
         this.vertexDictionary = new LinkedList<>();
     }
 
-    private static class VertexPair<E> {
+    private static class VertexPair<E> { // clase para etiquetar al numero con su vertice
         E label;
         Integer vertex;
 
@@ -25,11 +25,11 @@ public class DirectLabelGraph<E> extends DirectGraph {
         }
     }
 
-    public Adjacency exist_edge_label(E o, E d) {
-        return isLabelGraph() ? exist_edge(getVertex(o), getVertex(d)) : null;
+    public Adjacency exist_edge_label(E o, E d) { //verificacion que halla una arista entre dos etiquetas
+        return isLabelGraph() ? exist_edge(getVertex(o), getVertex(d)) : null; //verifica si es un grafo etiquetado
     }
 
-    public void insert_label(E o, E d, Float weight) {
+    public void insert_label(E o, E d, Float weight) { //inserta una arista con peso
         if (isLabelGraph()) {
             insert(getVertex(o), getVertex(d), weight);
         }
@@ -41,16 +41,16 @@ public class DirectLabelGraph<E> extends DirectGraph {
         }
     }
 
-    public LinkedList<Adjacency> adjacencies_label(E o) {
+    public LinkedList<Adjacency> adjacencies_label(E o) { //retorn alas adayacencias de una etiqueta
         return isLabelGraph() ? adjacencies(getVertex(o)) : new LinkedList<>();
     }
 
-    public void label_vertex(Integer vertex, E data) {
+    public void label_vertex(Integer vertex, E data) { //asigna la etiqueta al vertice
         labels[vertex] = data;
         vertexDictionary.add(new VertexPair<>(data, vertex));
     }
 
-    public Boolean isLabelGraph() {
+    public Boolean isLabelGraph() { //verifiacion si esta bien  etiquetado
         for (int i = 1; i <= nro_vertex(); i++) {
             if (labels[i] == null) {
                 return false;
@@ -59,7 +59,7 @@ public class DirectLabelGraph<E> extends DirectGraph {
         return true;
     }
 
-    public Integer getVertex(E label) {
+    public Integer getVertex(E label) { //obtine el numero de vertices por etiqueta
         VertexPair<E>[] pairs = vertexDictionary.toArray();
         for (VertexPair<E> pair : pairs) {
             if (pair.label.equals(label)) {

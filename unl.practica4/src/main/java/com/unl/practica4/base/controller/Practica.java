@@ -10,9 +10,9 @@ public class Practica {
         Scanner sc = new Scanner(System.in);
         int dimension = 0;
 
-        // Validación de dimensión mejorada
+        // Pedir al usuario una dimensión válida entre 30 y 100
         while (true) {
-            System.out.print("Ingrese dimensión del laberinto (30-100): ");
+            System.out.print("\nIngrese dimensión del laberinto (30-100): ");
             try {
                 dimension = Integer.parseInt(sc.nextLine());
                 if (dimension >= 30 && dimension <= 100) break;
@@ -23,20 +23,20 @@ public class Practica {
         }
 
         try {
-            // 1. Generar laberinto (usando el método original generar() de Prim2)
+            // Generar el laberinto como texto y convertirlo a matriz
             Prim2 generador = new Prim2();
             String laberintoStr = generador.generar(dimension, dimension);
             char[][] laberinto = parseLaberinto(laberintoStr, dimension);
 
-            // 2. Mostrar laberinto
+            // Mostrar el laberinto generado
             System.out.println("\nLaberinto generado:");
             printLaberinto(laberinto);
 
-            // 3. Resolver laberinto
+            // Resolver el laberinto usando Dijkstra
             System.out.println("\nResolviendo con Dijkstra...");
             LaberintoUtils.SolucionLaberinto solucion = LaberintoUtils.resolverLaberinto(laberinto);
 
-            // 4. Mostrar solución
+            // Mostrar el camino y el laberinto resuelto si hay solución
             System.out.println("\n" + solucion.camino);
             if (solucion.tieneSolucion) {
                 System.out.println("\nLaberinto resuelto:");
@@ -50,11 +50,10 @@ public class Practica {
         }
     }
 
-    // Método para convertir el String del laberinto a matriz char[][]
+    // Convierte el laberinto en texto a una matriz de caracteres
     private static char[][] parseLaberinto(String labStr, int dim) {
         String[] filas = labStr.split("\n");
         char[][] laberinto = new char[dim][dim];
-        
         for (int i = 0; i < dim; i++) {
             String[] valores = filas[i].split(",");
             for (int j = 0; j < dim; j++) {
@@ -64,20 +63,21 @@ public class Practica {
         return laberinto;
     }
 
-    // Método de visualización mejorado pero manteniendo esencia original
+    // Imprime el laberinto usando símbolos visuales
     private static void printLaberinto(char[][] lab) {
         for (char[] fila : lab) {
             for (char c : fila) {
                 switch (c) {
-                    case '0' -> System.out.print("▓▓");
-                    case '1' -> System.out.print("  ");
-                    case 'S' -> System.out.print("S ");
-                    case 'E' -> System.out.print("E ");
-                    case '*' -> System.out.print("★ ");
-                    default -> System.out.print("??");
+                    case '0' -> System.out.print("▓▓"); // Pared
+                    case '1' -> System.out.print("  "); // Camino
+                    case 'S' -> System.out.print("S "); // Inicio
+                    case 'E' -> System.out.print("E "); // Fin
+                    case '*' -> System.out.print("★ "); // Camino resuelto
+                    default -> System.out.print("??");  // Carácter no reconocido
                 }
             }
             System.out.println();
         }
     }
 }
+

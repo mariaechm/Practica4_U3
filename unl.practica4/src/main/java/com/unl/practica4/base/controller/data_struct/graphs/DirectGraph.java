@@ -3,15 +3,15 @@ package com.unl.practica4.base.controller.data_struct.graphs;
 import com.unl.practica4.base.controller.data_struct.list.LinkedList;
 
 public class DirectGraph extends Graph {
-    private Integer nro_vertex;
-    private Integer nro_edge;
-    private LinkedList<Adjacency> list_adjacencies[];
+    private Integer nro_vertex; //numero de vertices del grafo
+    private Integer nro_edge; // numero de aristas del grafo
+    private LinkedList<Adjacency> list_adjacencies[]; //lista de ayacencias 
 
     public DirectGraph(Integer nro_vertex) {
         this.nro_vertex = nro_vertex;
         this.nro_edge = 0;
         this.list_adjacencies = new LinkedList[nro_vertex + 1];
-        for (int i = 1; i <= nro_vertex; i++) {
+        for (int i = 1; i <= nro_vertex; i++) { //inicializa cada posicion con una nueva linked list
             list_adjacencies[i] = new LinkedList<>();
         }
     }
@@ -26,9 +26,9 @@ public class DirectGraph extends Graph {
         return this.nro_edge;
     }
 
-    @Override
+    @Override //verifica que haya un arista desde el vetex de origen o al  destino d
     public Adjacency exist_edge(Integer o, Integer d) {
-        if (o <= nro_vertex && d <= nro_vertex) {
+        if (o <= nro_vertex && d <= nro_vertex) { 
             LinkedList<Adjacency> list = list_adjacencies[o];
             if (!list.isEmpty()) {
                 Adjacency[] matrix = list.toArray();
@@ -42,18 +42,18 @@ public class DirectGraph extends Graph {
         return null;
     }
 
-    @Override
+    @Override //obtener peso de arista
     public float weight_edge(Integer o, Integer d) {
-        Adjacency adj = exist_edge(o, d);
+        Adjacency adj = exist_edge(o, d); 
         return adj != null ? adj.getWeight() : Float.NaN;
     }
 
-    @Override
+    @Override //inserccion de aristas sin peso
     public void insert(Integer o, Integer d) {
         insert(o, d, Float.NaN);
     }
 
-    @Override
+    @Override //inserccion de aristas con peso
     public void insert(Integer o, Integer d, float weight) {
         if (o <= nro_vertex && d <= nro_vertex) {
             if (exist_edge(o, d) == null) {

@@ -1,10 +1,9 @@
 package com.unl.practica4.base.controller.data_struct.graphs;
 
-// This will be the single, unified Point class
 public class Point {
-    public int r; // Changed to 'r' for consistency with maze generation context
-    public int c; // Changed to 'c' for consistency with maze generation context
-    public Point parent;
+    public int r;      // Fila
+    public int c;      // Columna
+    public Point parent; // Punto desde donde llegamos a este
 
     public Point(int r, int c, Point parent) {
         this.r = r;
@@ -12,9 +11,10 @@ public class Point {
         this.parent = parent;
     }
 
-    // Method for Prim's maze generation
+    // Devuelve el punto que sigue en la misma direccion del padre al actual
     public Point opposite() {
         if (parent == null) return null;
+
         if (this.r != parent.r) {
             return new Point(this.r + Integer.compare(this.r, parent.r), this.c, this);
         }
@@ -24,7 +24,6 @@ public class Point {
         return null;
     }
 
-    // Optional: For debugging or display
     @Override
     public String toString() {
         return "(" + r + "," + c + ")";

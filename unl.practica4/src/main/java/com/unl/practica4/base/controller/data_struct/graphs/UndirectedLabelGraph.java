@@ -38,6 +38,7 @@ public class UndirectedLabelGraph<E> extends DirectLabelGraph<E> {
         return adjList;
     }
 
+    //Dikstra
     public static class DijkstraSolver {
         public static class ResultadoDijkstra {
             public final int[] distancias;

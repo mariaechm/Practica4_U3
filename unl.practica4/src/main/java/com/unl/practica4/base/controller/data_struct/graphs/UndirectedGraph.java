@@ -9,9 +9,8 @@ public class UndirectedGraph extends DirectGraph {
     public void insert(Integer o, Integer d, float weight) {
         if (o <= nro_vertex() && d <= nro_vertex()) {
             if (exist_edge(o, d) == null) {
-                setNro_edge(nro_edge() + 1); // Solo incrementar una vez
+                setNro_edge(nro_edge() + 1); 
                 
-                // Insertar en ambas direcciones
                 Adjacency aux1 = new Adjacency(d, weight);
                 getList_adjacencies()[o].add(aux1);
                 
